@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Signal Timing History</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
+        th { background-color: #4CAF50; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .controls { margin-bottom: 20px; }
+        .controls form { display: inline-block; margin-right: 20px; }
+        .pagination a { padding: 5px 10px; margin: 2px; text-decoration: none; border: 1px solid #ccc; }
+        .pagination a.active { background-color: #4CAF50; color: white; }
+    </style>
+</head>
+<body>
+
+<h2 th:text="'Signal History for ' + ${intersection.name}"></h2>
+
+<div class="controls">
+    <form th:action="@{/signal-history-dashboard/{id}(id=${intersection.id})}" method="get">
+        <label>Start Date: <input type="date" name="startDate" th:value="${startDate}"/></label>
+        <label>End Date: <input type="date" name="endDate" th:value="${endDate}"/></label>
+        <button type="submit">Filter</button>
+    </form>
+
+    <button onclick="exportTableToCSV()">Export CSV</button>
+    <button onclick="downloadChart()">Download Chart</button>
+</div>
+
+<!-- Paginated Table -->
+<table>
+    <thead>
+    <tr>
+        <th>Time</th>
+        <th>Green</th>
+        <th>Red</th>
+        <th>Yellow</th>
+        <th th:if="${historyList[0]?.reason != null}">Reason</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entry : ${historyList}">
+        <td th:text="${#temporals.format(entry.recordedAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${entry.greenTime}"></td>
+        <td th:text="${entry.redTime}"></td>
+        <td th:text="${entry.yellowTime}"></td>
+        <td th:if="${entry.reason != null}" th:text="${entry.reason}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="pagination">
+    <span th:each="i : ${#numbers.sequence(0, totalPages-1)}">
+        <a th:href="@{/signal-history-dashboard/{id}(id=${intersection.id}, page=${i}, startDate=${startDate}, endDate=${endDate})}"
+           th:text="${i + 1}"
+           th:classappend="${i} == ${currentPage} ? 'active' : ''">
+        </a>
+    </span>
+</div>
+
+<canvas id="historyChart" width="600" height="300"></canvas>
+
+<script th:inline="javascript">
+    const intersectionId = /*[[${intersection.id}]]*/ 1;
+    const rawData = /*[[${historyList}]]*/ [];
+
+    const labels = rawData.map(e => new Date(e.recordedAt).toLocaleString());
+    const greenTimes = rawData.map(e => e.greenTime);
+    const redTimes = rawData.map(e => e.redTime);
+    const yellowTimes = rawData.map(e => e.yellowTime);
+
+    const ctx = document.getElementById('historyChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                { label: 'Green Time', data: greenTimes, borderColor: 'green', fill: false },
+                { label: 'Red Time', data: redTimes, borderColor: 'red', fill: false },
+                { label: 'Yellow Time', data: yellowTimes, borderColor: 'goldenrod', fill: false }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Signal Timing History'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Time (s)'
+                    }
+                }
+            }
+        }
+    });
+
+    function fetchLiveData() {
+        fetch(`/api/live-signal-history/${intersectionId}`)
+            .then(response => response.json())
+            .then(data => {
+                chart.data.labels = data.map(e => new Date(e.recordedAt).toLocaleString());
+                chart.data.datasets[0].data = data.map(e => e.greenTime);
+                chart.data.datasets[1].data = data.map(e => e.redTime);
+                chart.data.datasets[2].data = data.map(e => e.yellowTime);
+                chart.update();
+            });
+    }
+
+    setInterval(fetchLiveData, 10000);
+
+    function exportTableToCSV() {
+        const rows = document.querySelectorAll("table tr");
+        let csv = [];
+        rows.forEach(row => {
+            const cols = Array.from(row.querySelectorAll("td, th")).map(td => td.innerText);
+            csv.push(cols.join(","));
+        });
+        const blob = new Blob([csv.join("\n")], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "signal_history.csv";
+        a.click();
+        window.URL.revokeObjectURL(url);
+    }
+
+    function downloadChart() {
+        const chartCanvas = document.getElementById('historyChart');
+        const link = document.createElement('a');
+        link.download = 'chart.png';
+        link.href = chartCanvas.toDataURL('image/png');
+        link.click();
+    }
+</script>
+</body>
+</html>
