@@ -1,7 +1,10 @@
-🚦 Smart Traffic Signal Optimization System
+🚦  Smart Traffic Signal Optimization System:
+
 A smart, real-time traffic signal control platform that optimizes traffic flow using dynamic signal timing logic, intersection analytics, and a live dashboard—built with Java Spring Boot and Thymeleaf.
 
-📌 Project Overview
+📌 Project Description
+
+ Problem Statement:
 🚗 Urban areas frequently suffer from poorly timed traffic signals, leading to long queues, congestion, and wasted fuel. Fixed-timing traffic lights don't adapt to real-world scenarios.
 
 🎯 Goal: To design an intelligent signal management system that automatically optimizes green/red durations at intersections based on congestion data, while allowing real-time visualization and manual admin overrides.
@@ -62,7 +65,7 @@ Tracks every optimization decision with timestamps:-
 
 ![SQL Functioning](https://github.com/Vivek0375/SmartTrafficOptimizer/blob/5991134c77741cc4948d7e451d575f7160885c87/smart-traffic/Screenshot%202025-07-22%20160003.png)
 
-![SQL History](https://github.com/Vivek0375/SmartTrafficOptimizer/blob/5991134c77741cc4948d7e451d575f7160885c87/smart-traffic/Screenshot%202025-07-22%20160034.png)
+![Data History](https://github.com/Vivek0375/SmartTrafficOptimizer/blob/5991134c77741cc4948d7e451d575f7160885c87/smart-traffic/Screenshot%202025-07-22%20160034.png)
 
 
 ---
@@ -105,18 +108,7 @@ spring.jpa.show-sql=true
 
 📁 Project Structure
 
-smart-traffic-optimizer/
-├── src/
-│   ├── controller/
-│   ├── dto/
-│   ├── entity/
-│   ├── repository/
-│   ├── service/
-│   └── templates/         # Thymeleaf HTML files
-├── static/                # CSS, JS, images
-├── application.properties
-├── pom.xml
-└── README.md
+![Structure](https://github.com/Vivek0375/SmartTrafficOptimizer/blob/bc71d620667001f3d06a5c0c7319ad6d1c3951d8/smart-traffic/Screenshot%202025-07-27%20010734.png)
 
 ## 🧑‍💻 Author
 
@@ -124,3 +116,7 @@ smart-traffic-optimizer/
 
 * LinkedIn: [www.linkedin.com/in/vivekyadav375](https://www.linkedin.com/in/vivekyadav375)
 * GitHub: [@Vivek0375](https://github.com/Vivek0375)
+
+## 📜 LICENCE
+
+This project is licensed under [MIT LICENSE](LICENSE)
