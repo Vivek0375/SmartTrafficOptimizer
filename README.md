@@ -1,61 +1,126 @@
-#  Smart Traffic Signal Optimization System
+🚦 Smart Traffic Signal Optimization System
+A smart, real-time traffic signal control platform that optimizes traffic flow using dynamic signal timing logic, intersection analytics, and a live dashboard—built with Java Spring Boot and Thymeleaf.
 
-A Spring Boot-based web application that intelligently manages and optimizes traffic signal timings at various intersections based on real-time congestion data. It helps improve traffic flow and provides a dashboard for visualization and admin control.
+📌 Project Overview
+🚗 Urban areas frequently suffer from poorly timed traffic signals, leading to long queues, congestion, and wasted fuel. Fixed-timing traffic lights don't adapt to real-world scenarios.
 
----
+🎯 Goal: To design an intelligent signal management system that automatically optimizes green/red durations at intersections based on congestion data, while allowing real-time visualization and manual admin overrides.
 
-##  Features
+✅ Solution Summary
+🧠 The Smart Traffic Signal Optimization System continuously monitors intersection status and adjusts signal timings using configurable algorithms. It logs history, allows admin intervention, and presents the data through charts and tables on an intuitive dashboard.
 
-- ⏱️ **Dynamic Signal Optimization:** Adjusts green, red, and yellow timings using congestion data.
-- 📍 **Intersection Management:** Add, update, and monitor intersections with location metadata.
-- 📊 **Live Dashboard:** Real-time view of traffic conditions and current signal timings.
-- 🧾 **Signal History Tracking:** Logs historical timing changes and optimization reasons.
-- 🌐 **Google Maps Integration:** (Optional) Visual display of intersections on an interactive map.
-- 👨‍💼 **Admin Panel:** Manual override for signal timings and intersection configurations.
-- 📥 **Export Reports:** Download signal history as CSV/Excel and charts as images.
-- 🔁 **Auto Refresh:** Dashboard updates every 10 seconds with the latest traffic signal data.
-- 📂 **Backend Built with Spring Boot (Java 17)** using JPA, Thymeleaf, Lombok, and MySQL.
+🔍 Key highlights:
 
----
+Tracks real-time intersection statuses.
 
-##  📸   Screenshots : 
+Analyzes signal performance.
 
->->  screenshots of the live dashboard:
->
-> 
-> ![Live Dashboard](https://github.com/Vivek0375/SmartTrafficOptimizer/blob/6a98f216cbee287f13031650e15d1605d0aefb07/smart-traffic/Screenshot%202025-07-22%20123854.png)
+Provides visual insights.
+
+Exports signal history and charts.
 
 
--> Screenshot of Live Chart to analyse:
+🚀 Key Features
 
+Category	Features: 
+
+🛣️ Signal Logic	Dynamic green-yellow-red adjustment based on real-time congestion data
+📍 Intersection Panel	Add/update intersections with location metadata and control switches
+📊 Live Dashboard	Real-time table of signal status, timings, and visual indicators
+🧾 History Analytics	Detailed signal timing history logs with optimization reasons
+📈 Live Charts	Visualize historical signal performance with downloadable graphs
+📥 Export Options	Download signal history in CSV/Excel and charts as PNG
+🔄 Auto-Refresh	Real-time dashboard refresh every 10 seconds
+🌐 Google Maps (opt)	Plots intersections on an interactive map
+👨‍💼 Admin Override	Manual override of signal timings via admin panel
+
+🧑‍💻 Tech Stack
+Layer	Technology
+Backend	Java 17, Spring Boot, Spring MVC, JPA
+Frontend	Thymeleaf, Bootstrap, JavaScript
+Charts & UI	Chart.js, HTML5, CSS3
+Database	MySQL
+Reporting	Apache POI (Excel Export)
+Deployment	JAR Executable on  AWS EC2 
+
+##  🖼️ UI Screenshots : 
+
+>📍 Live Dashboard
+Real-time traffic status at all intersections:
+
+ ![Live Dashboard](https://github.com/Vivek0375/SmartTrafficOptimizer/blob/6a98f216cbee287f13031650e15d1605d0aefb07/smart-traffic/Screenshot%202025-07-22%20123854.png)
+
+
+📈 Live Chart for Signal Timing
+Visualizes historical signal adjustments for performance analysis
 
 ![Live Chart](https://github.com/Vivek0375/SmartTrafficOptimizer/blob/ea42aeb6fb4f6a7d47e2d3338f44c64ec11dbb00/smart-traffic/Screenshot%202025-07-22%20123810.png)
 
----
+📁 History Panel & SQL View:
 
-## 🛠️ Technologies Used
+Tracks every optimization decision with timestamps:-
 
-| Layer         | Tools/Tech                     |
-|--------------|--------------------------------|
-| Backend      | Java 17, Spring Boot, Spring MVC, Spring JPA |
-| Security     | Role-Based Access (if added)   |
-| Frontend     | Thymeleaf, Bootstrap, Chart.js, JavaScript |
-| Database     | MySQL                          |
-| Reporting    | Apache POI (Excel), Chart.js   |
-| Deployment   | JAR executable or AWS (optional) |
+![SQL Functioning](https://github.com/Vivek0375/SmartTrafficOptimizer/blob/5991134c77741cc4948d7e451d575f7160885c87/smart-traffic/Screenshot%202025-07-22%20160003.png)
+
+![SQL History](https://github.com/Vivek0375/SmartTrafficOptimizer/blob/5991134c77741cc4948d7e451d575f7160885c87/smart-traffic/Screenshot%202025-07-22%20160034.png)
+
 
 ---
 
-## 🧑‍💻 Project Setup (Run Locally)
+🛠️ How to Run Locally:-
+✅ Prerequisites
 
-### Prerequisites
+-Java 17+
+-Maven
+-MySQL (with a database named trafficdb or update in application.properties)
 
-- Java 17
-- Maven
-- MySQL
+▶️ Clone & Run
 
-### Clone & Run
+-git clone https://github.com/Vivek0375/SmartTrafficOptimizer.git
 
-```bash
-git clone https://github.com/<your-username>/smart-traffic-signal.git
-cd smart-traffic-signal
+-cd SmartTrafficOptimizer
+
+📦 Build the Project
+
+mvn clean install
+
+🚀 Start the Application
+
+mvn spring-boot:run
+
+🌐 Access the App
+Open http://localhost:8080 in your browser.
+
+⚙️ Configuration
+Edit your application.properties file:
+
+spring.datasource.url=jdbc:mysql://localhost:3306/trafficdb
+spring.datasource.username=root
+spring.datasource.password=yourpassword
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+
+
+📁 Project Structure
+
+smart-traffic-optimizer/
+├── src/
+│   ├── controller/
+│   ├── dto/
+│   ├── entity/
+│   ├── repository/
+│   ├── service/
+│   └── templates/         # Thymeleaf HTML files
+├── static/                # CSS, JS, images
+├── application.properties
+├── pom.xml
+└── README.md
+
+## 🧑‍💻 Author
+
+**Vivek Yadav**
+
+* LinkedIn: [www.linkedin.com/in/vivekyadav375](https://www.linkedin.com/in/vivekyadav375)
+* GitHub: [@Vivek0375](https://github.com/Vivek0375)
