@@ -1,4 +1,4 @@
-🚦  Smart Traffic Signal Optimization System:
+🚦 Smart Traffic Signal Optimization System
 
 A smart, real-time traffic signal control platform that optimizes traffic flow using dynamic signal timing logic, intersection analytics, and a live dashboard—built with Java Spring Boot and Thymeleaf.
 
