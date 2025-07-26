@@ -20,7 +20,8 @@ A Spring Boot-based web application that intelligently manages and optimizes tra
 
 ## 📸 Screenshots
 
-> _Add screenshots of the live dashboard, Google Map view, and signal history chart here._
+> screenshots of the live dashboard:
+> ![Live Dashboard](https://github.com/Vivek0375/SmartTrafficOptimizer/blob/6a98f216cbee287f13031650e15d1605d0aefb07/smart-traffic/Screenshot%202025-07-22%20123854.png)
 
 ---
 
