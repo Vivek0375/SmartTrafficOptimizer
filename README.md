@@ -2,7 +2,7 @@
 
 A smart, real-time traffic signal control platform that optimizes traffic flow using dynamic signal timing logic, intersection analytics, and a live dashboard—built with Java Spring Boot and Thymeleaf.
 
-📌 Project Description
+📌 Project Description:-
 
  Problem Statement:
 🚗 Urban areas frequently suffer from poorly timed traffic signals, leading to long queues, congestion, and wasted fuel. Fixed-timing traffic lights don't adapt to real-world scenarios.
