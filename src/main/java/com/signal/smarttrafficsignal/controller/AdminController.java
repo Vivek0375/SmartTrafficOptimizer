@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
     @RestController
     @RequestMapping("/admin")
     @RequiredArgsConstructor
-        //Admin controller
+        
     public class AdminController {
 
         private final IntersectionRepository intersectionRepository;
